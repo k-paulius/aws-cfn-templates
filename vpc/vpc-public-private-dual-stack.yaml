@@ -884,6 +884,8 @@ Resources:
           CidrIp: '127.0.0.1/32'
           IpProtocol: -1
       Tags:
+        - Key: Name
+          Value: !Sub '${pVPCName}-sg-no-ingress-egress'
         - Key: 'workload-id'
           Value: !Ref pWorkloadIdTag
         - Key: 'environment-id'
@@ -949,6 +951,66 @@ Outputs:
           - !If [ cIs2ndPrivateTier2ndAZEnabled, !Ref rSubnetPrivateB2, !Ref 'AWS::NoValue' ]
           - !If [ cIs2ndPrivateTier3rdAZEnabled, !Ref rSubnetPrivateC2, !Ref 'AWS::NoValue' ]
 
+  oSubnetPublicA:
+    Description: 'Public Subnet A'
+    Value: !Ref rSubnetPublicA
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetPublicA'
+
+  oSubnetPublicB:
+    Condition: cIs2ndAZEnabled
+    Description: 'Public Subnet B'
+    Value: !Ref rSubnetPublicB
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetPublicB'
+
+  oSubnetPublicC:
+    Condition: cIs3rdAZEnabled
+    Description: 'Public Subnet B'
+    Value: !Ref rSubnetPublicC
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetPublicC'
+
+  oRouteTablePublicA:
+    Description: 'Public Subnet A Route Table'
+    Value: !Ref rRouteTablePublicA
+    Export:
+      Name: !Sub '${AWS::StackName}-RouteTablePublicA'
+
+  oRouteTablePublicB:
+    Condition: cIs2ndAZEnabled
+    Description: 'Public Subnet B Route Table'
+    Value: !Ref rRouteTablePublicB
+    Export:
+      Name: !Sub '${AWS::StackName}-RouteTablePublicB'
+
+  oRouteTablePublicC:
+    Condition: cIs3rdAZEnabled
+    Description: 'Public Subnet C Route Table'
+    Value: !Ref rRouteTablePublicC
+    Export:
+      Name: !Sub '${AWS::StackName}-RouteTablePublicC'
+
+  oRouteTablePrivateA1:
+    Description: '1st Tier Private Subnet A Route Table'
+    Value: !Ref rRouteTablePrivateA1
+    Export:
+      Name: !Sub '${AWS::StackName}-RouteTablePrivateA1'
+
+  oRouteTablePrivateB1:
+    Condition: cIs2ndAZEnabled
+    Description: '1st Tier Private Subnet B Route Table'
+    Value: !Ref rRouteTablePrivateB1
+    Export:
+      Name: !Sub '${AWS::StackName}-RouteTablePrivateB1'
+
+  oRouteTablePrivateC1:
+    Condition: cIs3rdAZEnabled
+    Description: '1st Tier Private Subnet C Route Table'
+    Value: !Ref rRouteTablePrivateC1
+    Export:
+      Name: !Sub '${AWS::StackName}-RouteTablePrivateC1'
+
   oTemplateVersion:
     Description: 'Template version'
-    Value: '2.0.0'
+    Value: '2.0.1'

@@ -55,3 +55,34 @@ This template deploys a VPC with a public subnet and one or two private subnets 
     - Value used in the "environment-id" tag
 - `pOwnerNameTag`
     - Value used in the "owner" tag
+
+## `vpc-nat-gateway.yaml`
+
+### Description
+
+This template deploys NAT Gateway(s) into a VPC created using the `vpc-public-private-dual-stack.yaml` template. You can control the number of Availability Zones where the NAT Gateway will be deployed using the `pNumberOfAZs` parameter.
+
+A route for `0.0.0.0/0` directed to the NAT Gateway will only be added to the first tier private subnets.
+
+When single AZ routing is enabled (`pEnableSingleAZRouting=true`), only one NAT Gateway will be created. Traffic from all subnets, as determined by the `pNumberOfAZs` parameter, will be routed through that single NAT Gateway. This is mostly useful for testing purposes, as it sacrifices high availability and incurs charges for cross-AZ traffic.
+
+### Parameters
+
+- `pParentVPCStackName`
+    - Name of the parent VPC stack that was created using `vpc-public-private-dual-stack.yaml` template
+- `pVPCName`
+    - Name of the VPC
+    - Should match VPC name used when deploying parent stack
+- `pNumberOfAZs`
+    - Number of Availability Zones (AZs) to use
+    - *Must not exceed the number of AZs VPC is deployed to*
+    - Allowed values: 1, 2, 3
+- `pEnableSingleAZRouting`
+    - Route traffic from all subnets (AZs) through a single NAT Gateway
+    - Allowed values: true, false
+- `pWorkloadIdTag`
+    - Value used in the "workload-id" tag
+- `pEnvironmentIdTag`
+    - Value used in the "environment-id" tag
+- `pOwnerNameTag`
+    - Value used in the "owner" tag
