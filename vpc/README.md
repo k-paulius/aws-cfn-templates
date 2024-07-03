@@ -105,3 +105,33 @@ This template creates a VPC flow log that sends traffic flow information to an A
     - Value used in the "environment-id" tag
 - `pOwnerNameTag`
     - Value used in the "owner" tag
+
+## `vpc-endpoints.yaml`
+
+### Description
+
+This template creates VPC endpoints for a VPC created using the `vpc-public-private-dual-stack.yaml` template. VPC endpoints will only be added to the first tier private subnets.
+
+Notes:
+- EC2 Instance Connect Endpoint is always created in a single subnet.
+
+### Parameters
+
+- `pParentVPCStackName`
+    - Name of the parent VPC stack that was created using `vpc-public-private-dual-stack.yaml` template
+- `pNumberOfAZs`
+    - Number of Availability Zones (AZs) to use
+    - *Must not exceed the number of AZs VPC is deployed to*
+    - Allowed values: 1, 2, 3
+- `pDeployEICEEndpoint`
+    - Deploy EC2 Instance Connect Endpoint?
+    - Allowed values: true, false
+- `pDeploySSMEndpoints`
+    - Deploy SSM Endpoints: ec2messages, ssm, ssmmessages?
+    - Allowed values: true, false
+- `pWorkloadIdTag`
+    - Value used in the "workload-id" tag
+- `pEnvironmentIdTag`
+    - Value used in the "environment-id" tag
+- `pOwnerNameTag`
+    - Value used in the "owner" tag
