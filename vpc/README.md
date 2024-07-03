@@ -86,3 +86,25 @@ When single AZ routing is enabled (`pEnableSingleAZRouting=true`), only one NAT 
     - Value used in the "environment-id" tag
 - `pOwnerNameTag`
     - Value used in the "owner" tag
+
+## `vpc-flow-logs-s3.yaml`
+
+### Description
+
+This template creates a VPC flow log that sends traffic flow information to an Amazon S3 bucket for a VPC created using the `vpc-public-private-dual-stack.yaml` template.
+
+### Parameters
+
+- `pParentVPCStackName`
+    - Name of the parent VPC stack that was created using `vpc-public-private-dual-stack.yaml` template
+- `pFlowLogsBucketName`
+    - Name of the Amazon S3 bucket where traffic flow information will be stored
+- `pTrafficType`
+    - The type of traffic to monitor (accepted traffic, rejected traffic, or all traffic)
+    - Allowed values: ACCEPT, REJECT, ALL
+- `pWorkloadIdTag`
+    - Value used in the "workload-id" tag
+- `pEnvironmentIdTag`
+    - Value used in the "environment-id" tag
+- `pOwnerNameTag`
+    - Value used in the "owner" tag
