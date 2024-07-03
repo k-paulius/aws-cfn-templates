@@ -914,6 +914,8 @@ Outputs:
   oNumberOfAZs:
     Description: 'Number of AZs'
     Value: !Ref pNumberOfAZs
+    Export:
+      Name: !Sub '${AWS::StackName}-NumberOfAZs'
 
   oAZs:
     Description: 'List of AZs'
@@ -923,14 +925,20 @@ Outputs:
         - - !Select [0, !GetAZs '']
           - !If [ cIs2ndAZEnabled, !Select [1, !GetAZs ''], !Ref 'AWS::NoValue' ]
           - !If [ cIs3rdAZEnabled, !Select [2, !GetAZs ''], !Ref 'AWS::NoValue' ]
+    Export:
+      Name: !Sub '${AWS::StackName}-AZs'
 
   oIPv4CidrBlock:
     Description: 'VPC IPv4 CIDR Block'
     Value: !GetAtt 'rVPC.CidrBlock'
+    Export:
+      Name: !Sub '${AWS::StackName}-IPv4CidrBlock'
 
   oIPv6CidrBlock:
     Description: 'VPC IPv6 CIDR Block'
     Value: !Select [ 0, !GetAtt 'rVPC.Ipv6CidrBlocks' ]
+    Export:
+      Name: !Sub '${AWS::StackName}-IPv6CidrBlock'
 
   oPublicSubnets:
     Description: 'Public Subnets'
@@ -940,6 +948,8 @@ Outputs:
         - - !Ref rSubnetPublicA
           - !If [ cIs2ndAZEnabled, !Ref rSubnetPublicB, !Ref 'AWS::NoValue' ]
           - !If [ cIs3rdAZEnabled, !Ref rSubnetPublicC, !Ref 'AWS::NoValue' ]
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnets'
 
   oPrivateSubnetsTier1:
     Description: 'Private Subnets'
@@ -949,6 +959,8 @@ Outputs:
         - - !Ref rSubnetPrivateA1
           - !If [ cIs2ndAZEnabled, !Ref rSubnetPrivateB1, !Ref 'AWS::NoValue' ]
           - !If [ cIs3rdAZEnabled, !Ref rSubnetPrivateC1, !Ref 'AWS::NoValue' ]
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnetsTier1'
 
   oPrivateSubnetsTier2:
     Description: 'Private Subnets'
@@ -958,6 +970,8 @@ Outputs:
         - - !If [ cIs2ndPrivateTier1stAZEnabled, !Ref rSubnetPrivateA2, !Ref 'AWS::NoValue' ]
           - !If [ cIs2ndPrivateTier2ndAZEnabled, !Ref rSubnetPrivateB2, !Ref 'AWS::NoValue' ]
           - !If [ cIs2ndPrivateTier3rdAZEnabled, !Ref rSubnetPrivateC2, !Ref 'AWS::NoValue' ]
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnetsTier2'
 
   oSubnetPublicA:
     Description: 'Public Subnet A'
@@ -978,6 +992,42 @@ Outputs:
     Value: !Ref rSubnetPublicC
     Export:
       Name: !Sub '${AWS::StackName}-SubnetPublicC'
+
+  oSubnetPrivateA1:
+    Description: '1st Tier Private Subnet A'
+    Value: !Ref rSubnetPrivateA1
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetPrivateA1'
+
+  oSubnetPrivateB1:
+    Description: '1st Tier Private Subnet B'
+    Value: !Ref rSubnetPrivateB1
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetPrivateB1'
+
+  oSubnetPrivateC1:
+    Description: '1st Tier Private Subnet C'
+    Value: !Ref rSubnetPrivateC1
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetPrivateC1'
+
+  oSubnetPrivateA2:
+    Description: '2nd Tier Private Subnet A'
+    Value: !Ref rSubnetPrivateA2
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetPrivateA2'
+
+  oSubnetPrivateB2:
+    Description: '2nd Tier Private Subnet B'
+    Value: !Ref rSubnetPrivateB2
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetPrivateB2'
+
+  oSubnetPrivateC2:
+    Description: '2nd Tier Private Subnet C'
+    Value: !Ref rSubnetPrivateC2
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetPrivateC2'
 
   oRouteTablePublicA:
     Description: 'Public Subnet A Route Table'
