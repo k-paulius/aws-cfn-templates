@@ -1000,30 +1000,35 @@ Outputs:
       Name: !Sub '${AWS::StackName}-SubnetPrivateA1'
 
   oSubnetPrivateB1:
+    Condition: cIs2ndAZEnabled
     Description: '1st Tier Private Subnet B'
     Value: !Ref rSubnetPrivateB1
     Export:
       Name: !Sub '${AWS::StackName}-SubnetPrivateB1'
 
   oSubnetPrivateC1:
+    Condition: cIs3rdAZEnabled
     Description: '1st Tier Private Subnet C'
     Value: !Ref rSubnetPrivateC1
     Export:
       Name: !Sub '${AWS::StackName}-SubnetPrivateC1'
 
   oSubnetPrivateA2:
+    Condition: cIs2ndPrivateTier1stAZEnabled
     Description: '2nd Tier Private Subnet A'
     Value: !Ref rSubnetPrivateA2
     Export:
       Name: !Sub '${AWS::StackName}-SubnetPrivateA2'
 
   oSubnetPrivateB2:
+    Condition: cIs2ndPrivateTier2ndAZEnabled
     Description: '2nd Tier Private Subnet B'
     Value: !Ref rSubnetPrivateB2
     Export:
       Name: !Sub '${AWS::StackName}-SubnetPrivateB2'
 
   oSubnetPrivateC2:
+    Condition: cIs2ndPrivateTier3rdAZEnabled
     Description: '2nd Tier Private Subnet C'
     Value: !Ref rSubnetPrivateC2
     Export:
@@ -1071,4 +1076,4 @@ Outputs:
 
   oTemplateVersion:
     Description: 'Template version'
-    Value: '2.0.2'
+    Value: '2.0.3'
