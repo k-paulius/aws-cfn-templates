@@ -902,6 +902,14 @@ Outputs:
   oVPCId:
     Description: 'VPC ID'
     Value: !Ref rVPC
+    Export:
+      Name: !Sub '${AWS::StackName}-VPCId'
+
+  oVPCName:
+    Description: 'Name of the VPC'
+    Value: !Ref pVPCName
+    Export:
+      Name: !Sub '${AWS::StackName}-VPCName'
 
   oNumberOfAZs:
     Description: 'Number of AZs'
@@ -1013,4 +1021,4 @@ Outputs:
 
   oTemplateVersion:
     Description: 'Template version'
-    Value: '2.0.1'
+    Value: '2.0.2'
