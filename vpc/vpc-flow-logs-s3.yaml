@@ -63,7 +63,13 @@ Resources:
       ResourceType: 'VPC'
       TrafficType: !Ref pTrafficType
       LogDestinationType: 's3'
-      LogDestination: !Join ['', [!Sub 'arn:${AWS::Partition}:s3:::${pFlowLogsBucketName}/', {'Fn::ImportValue': !Sub '${pParentVPCStackName}-VPCName'}, '/']]
+      LogDestination: !Join
+        - ''
+        - - !Sub 'arn:${AWS::Partition}:s3:::${pFlowLogsBucketName}/'
+          - {'Fn::ImportValue': !Sub '${pParentVPCStackName}-VPCId'}
+          - '-'
+          - {'Fn::ImportValue': !Sub '${pParentVPCStackName}-VPCName'}
+          - '/'
       Tags:
         - Key: Name
           Value: !Join ['', [{'Fn::ImportValue': !Sub '${pParentVPCStackName}-VPCName'}, '-flow-logs-s3']]
@@ -78,4 +84,4 @@ Outputs:
 
   oTemplateVersion:
     Description: 'Template version'
-    Value: '1.0.0'
+    Value: '1.0.1'
