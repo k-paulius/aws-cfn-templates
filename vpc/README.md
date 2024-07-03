@@ -70,9 +70,6 @@ When single AZ routing is enabled (`pEnableSingleAZRouting=true`), only one NAT 
 
 - `pParentVPCStackName`
     - Name of the parent VPC stack that was created using `vpc-public-private-dual-stack.yaml` template
-- `pVPCName`
-    - Name of the VPC
-    - Should match VPC name used when deploying parent stack
 - `pNumberOfAZs`
     - Number of Availability Zones (AZs) to use
     - *Must not exceed the number of AZs VPC is deployed to*
