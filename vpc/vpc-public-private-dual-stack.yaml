@@ -963,6 +963,7 @@ Outputs:
       Name: !Sub '${AWS::StackName}-PrivateSubnetsTier1'
 
   oPrivateSubnetsTier2:
+    Condition: cIs2ndPrivateTier1stAZEnabled
     Description: 'Private Subnets'
     Value:
       !Join
@@ -1076,4 +1077,4 @@ Outputs:
 
   oTemplateVersion:
     Description: 'Template version'
-    Value: '2.0.3'
+    Value: '2.0.4'
