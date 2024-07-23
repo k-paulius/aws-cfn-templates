@@ -84,6 +84,11 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: {'Fn::ImportValue': !Sub '${pParentVPCStackName}-IPv4CidrBlock'}
+        - Description: 'Allows outbound RDP traffic to the VPC'
+          IpProtocol: tcp
+          FromPort: 3389
+          ToPort: 3389
+          CidrIp: {'Fn::ImportValue': !Sub '${pParentVPCStackName}-IPv4CidrBlock'}
       # SecurityGroupIngress:
       # Note: Traffic to the endpoint originates from the EICE Service, and it is allowed regardless of the inbound rules for the endpoint SG
       Tags:
@@ -209,4 +214,4 @@ Outputs:
 
   oTemplateVersion:
     Description: 'Template version'
-    Value: '1.0.0'
+    Value: '1.0.1'
